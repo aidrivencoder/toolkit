@@ -40,11 +40,11 @@ Specialized sub-agents for different phases:
 - **maid-refactorer** - Phase 3.5: Improves code quality while maintaining compliance
 - **maid-auditor** - Cross-cutting: Enforces MAID compliance across all phases
 
-### Complete Documentation
-- Full MAID methodology documentation injected automatically
-- MAID specification (v1.3)
+### On-Demand MAID Methodology Guidance
+- **MAID Methodology Skill** - Activated when you ask about MAID or use MAID commands
+- Full MAID specification (v1.3) available on-demand
 - Unit testing rules and best practices
-- No need to modify CLAUDE.md
+- Documentation loaded only when needed - keeps sessions lightweight
 
 ## Prerequisites
 
@@ -67,9 +67,9 @@ Specialized sub-agents for different phases:
 ```
 
 The plugin will automatically:
-1. Install the `maid-runner` PyPI package using `uv`
+1. Install the `maid-runner` PyPI package using `uv` (silent, idempotent)
 2. Make all MAID commands and agents available
-3. Inject MAID methodology documentation into your session
+3. Activate MAID methodology guidance when you need it (on-demand skill)
 
 ## How It Differs from `maid init`
 
@@ -97,7 +97,7 @@ maid init
 # Everything is ready to use!
 # - Commands available as /command-name
 # - Agents available via Task tool
-# - Docs injected automatically
+# - MAID methodology skill activates when needed
 # - No CLAUDE.md modification needed
 ```
 
@@ -106,7 +106,8 @@ maid init
 |---------|-----------|--------|
 | Installation | Manual pip/uv install | Automatic on session start |
 | Commands/Agents | Copies to .claude/ | Provided by plugin |
-| Documentation | Modifies CLAUDE.md | Injected via SessionStart hook |
+| Documentation | Modifies CLAUDE.md | On-demand skill (activated when needed) |
+| Context Usage | Always loaded | Only when using MAID |
 | Updates | Manual re-run of init | Automatic with plugin updates |
 | Project Structure | Creates manifests/, tests/, .maid/docs/ | Created when needed by commands |
 
@@ -114,7 +115,16 @@ maid init
 
 After installing the plugin:
 
-1. **Start using MAID commands**
+1. **Access MAID Methodology Guidance** (on-demand)
+
+   The MAID methodology skill activates automatically when you:
+   - Ask about MAID: "How do I use MAID?", "What is MAID methodology?"
+   - Mention manifests: "Create a manifest", "MAID workflow"
+   - Use MAID commands: `/generate-manifest`, `/maid-run`, etc.
+
+   The skill provides complete MAID v1.3 documentation including workflow, rules, and best practices.
+
+2. **Start using MAID commands**
    ```bash
    # Generate your first manifest
    /generate-manifest
@@ -123,7 +133,7 @@ After installing the plugin:
    /maid-run
    ```
 
-2. **Create your first manifest manually**
+3. **Create your first manifest manually**
    ```json
    // manifests/task-001-example.manifest.json
    {
@@ -145,13 +155,13 @@ After installing the plugin:
    }
    ```
 
-3. **Generate tests and implement**
+4. **Generate tests and implement**
    ```bash
    /generate-tests manifests/task-001-example.manifest.json
    /implement manifests/task-001-example.manifest.json
    ```
 
-4. **Validate your work**
+5. **Validate your work**
    ```bash
    /run-validation task-001
    ```

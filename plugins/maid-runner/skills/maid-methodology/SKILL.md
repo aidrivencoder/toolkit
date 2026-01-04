@@ -1,3 +1,9 @@
+---
+name: MAID Methodology
+description: This skill should be used when the user asks about "MAID methodology", "manifest-driven development", "create a manifest", "MAID workflow", "MAID rules", "validate manifest", "how to use MAID", "what is MAID", mentions "manifests/" directory, asks to "follow MAID", or when working with MAID Runner commands. Provides comprehensive guidance on the Manifest-driven AI Development (MAID) v1.3 methodology.
+version: 1.3.0
+---
+
 # MAID Methodology
 
 **This project uses Manifest-driven AI Development (MAID) v1.3**
@@ -13,7 +19,7 @@ This project is compatible with MAID-aware AI agents including Claude Code and o
 
 ## Prerequisites: Installing MAID Runner
 
-MAID Runner is a Python CLI tool that validates manifests and runs tests. Install it using one of these methods:
+MAID Runner is a Python CLI tool that validates manifests and runs tests. The MAID Runner plugin automatically installs it on session start, but you can also install it manually using one of these methods:
 
 **Option 1: Using pipx (recommended for global installation)**
 ```bash
@@ -231,5 +237,7 @@ This breathing room allows practical development without bureaucracy while maint
 
 ## Additional Resources
 
-- **Full MAID Specification**: Available in the MAID Runner plugin documentation
+For complete MAID specification details, see the full documentation at:
+- **Full MAID Specification**: @${CLAUDE_PLUGIN_ROOT}/docs/maid_specs.md
+- **Unit Testing Rules**: @${CLAUDE_PLUGIN_ROOT}/docs/unit-testing-rules.md
 - **MAID Runner Repository**: https://github.com/mamertofabian/maid-runner
