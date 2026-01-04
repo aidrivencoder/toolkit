@@ -13,9 +13,8 @@
     {
       "name": "maid-runner",
       "source": {
-        "source": "github",
-        "repo": "mamertofabian/maid-runner",
-        "path": "plugin"
+        "source": "local",
+        "path": "plugins/maid-runner"
       },
       "description": "Tool-agnostic validation framework for Manifest-driven AI Development (MAID) methodology",
       "version": "0.7.0",

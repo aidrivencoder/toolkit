@@ -1,0 +1,18 @@
+{
+  "SessionStart": [
+    {
+      "matcher": "*",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "${CLAUDE_PLUGIN_ROOT}/scripts/install_maid_runner.sh",
+          "timeout": 30
+        },
+        {
+          "type": "prompt",
+          "prompt": "@${CLAUDE_PLUGIN_ROOT}/docs/maid-methodology-context.md"
+        }
+      ]
+    }
+  ]
+}

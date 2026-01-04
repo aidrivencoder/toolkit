@@ -1,0 +1,13 @@
+{
+  "name": "maid-runner",
+  "version": "0.7.0",
+  "description": "Tool-agnostic validation framework for Manifest-driven AI Development (MAID) methodology",
+  "author": {
+    "name": "Mamerto Fabian",
+    "email": "mamerto@codefrost.dev"
+  },
+  "repository": "https://github.com/mamertofabian/maid-runner",
+  "license": "MIT",
+  "category": "productivity",
+  "keywords": ["maid", "validation", "ai-development", "manifest", "architecture", "testing"]
+}
