@@ -1,0 +1,82 @@
+{
+  "name": "aidrivencoder",
+  "owner": {
+    "name": "AI-Driven Coder",
+    "email": "mamerto@codefrost.dev"
+  },
+  "metadata": {
+    "description": "Professional AI development tools from AI-Driven Coder",
+    "version": "1.0.0",
+    "homepage": "https://aidrivencoder.com"
+  },
+  "plugins": [
+    {
+      "name": "maid-runner",
+      "source": {
+        "source": "github",
+        "repo": "mamertofabian/maid-runner"
+      },
+      "description": "Tool-agnostic validation framework for Manifest-driven AI Development (MAID) methodology",
+      "version": "0.7.0",
+      "author": {
+        "name": "Mamerto Fabian",
+        "email": "mamerto@codefrost.dev"
+      },
+      "repository": "https://github.com/mamertofabian/maid-runner",
+      "license": "MIT",
+      "category": "productivity",
+      "keywords": ["maid", "validation", "ai-development", "manifest", "architecture", "testing"]
+    },
+    {
+      "name": "maid-runner-mcp",
+      "source": {
+        "source": "github",
+        "repo": "mamertofabian/maid-runner-mcp"
+      },
+      "description": "Model Context Protocol server for MAID Runner validation tools - bridges AI agents with MAID framework",
+      "version": "0.1.0",
+      "author": {
+        "name": "Mamerto Fabian",
+        "email": "mamerto@codefrost.dev"
+      },
+      "repository": "https://github.com/mamertofabian/maid-runner-mcp",
+      "license": "MIT",
+      "category": "ai-tools",
+      "keywords": ["maid", "mcp", "model-context-protocol", "validation", "ai-agents"]
+    },
+    {
+      "name": "everything-search",
+      "source": {
+        "source": "github",
+        "repo": "mamertofabian/mcp-everything-search"
+      },
+      "description": "Fast cross-platform file search MCP server - find files instantly across your entire system",
+      "version": "latest",
+      "author": {
+        "name": "Mamerto Fabian",
+        "email": "mamerto@codefrost.dev"
+      },
+      "repository": "https://github.com/mamertofabian/mcp-everything-search",
+      "license": "MIT",
+      "category": "productivity",
+      "keywords": ["search", "files", "mcp", "everything", "locate", "productivity"]
+    },
+    {
+      "name": "elevenlabs",
+      "source": {
+        "source": "github",
+        "repo": "mamertofabian/elevenlabs-mcp-server"
+      },
+      "description": "ElevenLabs text-to-speech MCP server - generate natural voice audio in AI workflows",
+      "version": "latest",
+      "author": {
+        "name": "Mamerto Fabian",
+        "email": "mamerto@codefrost.dev"
+      },
+      "repository": "https://github.com/mamertofabian/elevenlabs-mcp-server",
+      "license": "MIT",
+      "category": "ai-tools",
+      "keywords": ["elevenlabs", "tts", "text-to-speech", "mcp", "voice", "audio"]
+    }
+  ]
+}
