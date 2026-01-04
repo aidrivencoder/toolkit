@@ -132,10 +132,10 @@ Generate natural-sounding voice audio directly from your AI workflows using Elev
 
 ### Video Tutorials
 
-Coming soon! Subscribe to [AI-Driven Coder](https://www.youtube.com/@aidrivencoder) for upcoming tutorials on:
-- Getting started with MAID methodology
-- Building plugins for Claude Code
-- Integrating MCP servers into your workflow
+Subscribe to [AI-Driven Coder](https://www.youtube.com/@aidrivencoder) for upcoming tutorials on:
+- [Getting started with MAID methodology](https://youtu.be/A4_6zqPO1yQ)
+- Building plugins for Claude Code - Coming soon!
+- [Integrating MCP servers into your workflow](https://youtu.be/A0spAPTD4XY)
 
 ## 🤝 Contributing
 
