@@ -14,7 +14,7 @@
       "name": "maid-runner",
       "source": {
         "source": "local",
-        "path": "plugins/maid-runner"
+        "path": "./plugins/maid-runner"
       },
       "description": "Tool-agnostic validation framework for Manifest-driven AI Development (MAID) methodology",
       "version": "0.7.0",
