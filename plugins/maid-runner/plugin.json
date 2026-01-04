@@ -8,6 +8,5 @@
   },
   "repository": "https://github.com/mamertofabian/maid-runner",
   "license": "MIT",
-  "category": "productivity",
   "keywords": ["maid", "validation", "ai-development", "manifest", "architecture", "testing"]
 }
