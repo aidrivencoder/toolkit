@@ -1,14 +1,17 @@
 {
-  "SessionStart": [
-    {
-      "matcher": "*",
-      "hooks": [
-        {
-          "type": "command",
-          "command": "${CLAUDE_PLUGIN_ROOT}/scripts/install_maid_runner.sh",
-          "timeout": 30
-        }
-      ]
-    }
-  ]
+  "description": "Automatically install maid-runner PyPI package on session start",
+  "hooks": {
+    "SessionStart": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "${CLAUDE_PLUGIN_ROOT}/scripts/install_maid_runner.sh",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
 }
