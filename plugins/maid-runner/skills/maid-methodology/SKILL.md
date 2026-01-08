@@ -103,6 +103,79 @@ Task tool parameters:
 
 ---
 
+## MAID Workflow with Subagents
+
+**⚠️ REMINDER: Each phase below REQUIRES using the designated subagent. Do not perform these phases directly.**
+
+### Phase 1: Goal Definition & Manifest Creation
+
+**⚠️ MUST USE SUBAGENT: `maid-manifest-architect`**
+
+1. Confirm the high-level goal with user before proceeding
+2. **INVOKE the `maid-manifest-architect` subagent** using the Task tool to:
+   - Analyze the goal and identify affected files
+   - Find next task number: `ls manifests/task-*.manifest.json | tail -1`
+   - Draft manifest (`manifests/task-XXX.manifest.json`) - **PRIMARY CONTRACT**
+3. Subagent runs: `maid validate manifests/task-XXX.manifest.json --use-manifest-chain`
+4. Iterate until validation passes
+
+**When to create a manifest**: Only for public API changes (functions, classes, methods without `_` prefix). Private implementation refactoring does NOT need a manifest.
+
+### Phase 2: Planning Loop (Test Design)
+
+**⚠️ MUST USE SUBAGENT: `maid-test-designer`**
+
+**Before ANY implementation - iterative refinement:**
+1. **INVOKE the `maid-test-designer` subagent** using the Task tool to:
+   - Read manifest `expectedArtifacts`
+   - Create behavioral tests (`tests/test_task_XXX_*.py` or `tests/test_task_XXX_*.test.ts`)
+   - **Follow unit-testing-rules.md** for testing standards
+   - Tests must USE artifacts AND ASSERT on behavior
+2. Subagent runs: `maid validate manifests/task-XXX.manifest.json --validation-mode behavioral --use-manifest-chain`
+3. Verify Red phase: Tests should FAIL (no implementation yet)
+4. Refine BOTH tests & manifest together until validation passes
+
+**Quality Gate**: **INVOKE `maid-plan-reviewer` subagent** to review manifest and tests before proceeding to implementation.
+
+### Phase 3: Implementation (TDD)
+
+**⚠️ MUST USE SUBAGENT: `maid-developer`**
+
+1. Confirm Red phase (tests fail)
+2. Load ONLY files from manifest (`editableFiles` + `readonlyFiles`)
+3. **INVOKE the `maid-developer` subagent** using the Task tool to:
+   - Implement code to pass tests (Green phase)
+   - Match manifest artifacts exactly
+   - Only edit files listed in manifest
+4. Subagent runs: `maid validate manifests/task-XXX.manifest.json --validation-mode implementation --use-manifest-chain`
+5. Run behavioral tests (from `validationCommand`)
+6. Iterate until all validations and tests pass
+
+**Error Recovery**: If validation fails, **INVOKE `maid-fixer` subagent** to identify and fix issues one at a time.
+
+### Phase 3.5: Refactoring
+
+**⚠️ MUST USE SUBAGENT: `maid-refactorer`**
+
+1. After tests pass, **INVOKE the `maid-refactorer` subagent** to:
+   - Improve code quality while tests pass
+   - Maintain public API and manifest compliance
+   - Apply clean code principles and patterns
+2. Validate tests still pass after each change
+3. Keep public API unchanged
+
+### Phase 4: Integration
+
+**VALIDATE EVERYTHING**:
+```bash
+maid validate        # Validate ALL manifests
+maid test            # Run ALL validation commands
+pytest tests/ -v     # Full test suite (Python)
+npm test             # Full test suite (TypeScript)
+```
+
+---
+
 ## MAID CLI Quick Reference
 
 ### Essential Commands (Run These Frequently!)
@@ -137,77 +210,6 @@ maid test --watch-all                     # Multi-manifest
 # Get help
 maid --help
 maid validate --help
-```
-
----
-
-## MAID Workflow with Agents
-
-### Phase 1: Goal Definition & Manifest Creation
-
-**Agent**: `maid-manifest-architect`
-
-1. Confirm the high-level goal with user before proceeding
-2. Use the `maid-manifest-architect` agent to:
-   - Analyze the goal and identify affected files
-   - Find next task number: `ls manifests/task-*.manifest.json | tail -1`
-   - Draft manifest (`manifests/task-XXX.manifest.json`) - **PRIMARY CONTRACT**
-3. **VALIDATE**: `maid validate manifests/task-XXX.manifest.json --use-manifest-chain`
-4. Iterate until validation passes
-
-**When to create a manifest**: Only for public API changes (functions, classes, methods without `_` prefix). Private implementation refactoring does NOT need a manifest.
-
-### Phase 2: Planning Loop (Test Design)
-
-**Agent**: `maid-test-designer`
-
-**Before ANY implementation - iterative refinement:**
-1. Use the `maid-test-designer` agent to:
-   - Read manifest `expectedArtifacts`
-   - Create behavioral tests (`tests/test_task_XXX_*.py` or `tests/test_task_XXX_*.test.ts`)
-   - **CRITICAL**: Follow the unit testing rules in `@${CLAUDE_PLUGIN_ROOT}/docs/unit-testing-rules.md`
-   - Tests must USE artifacts AND ASSERT on behavior
-2. **VALIDATE behavioral**: `maid validate manifests/task-XXX.manifest.json --validation-mode behavioral --use-manifest-chain`
-3. Verify Red phase: Tests should FAIL (no implementation yet)
-4. Refine BOTH tests & manifest together until validation passes
-
-**Quality Gate**: Use `maid-plan-reviewer` agent to review manifest and tests before proceeding to implementation.
-
-### Phase 3: Implementation (TDD)
-
-**Agent**: `maid-developer`
-
-1. Confirm Red phase (tests fail)
-2. Load ONLY files from manifest (`editableFiles` + `readonlyFiles`)
-3. Use the `maid-developer` agent to:
-   - Implement code to pass tests (Green phase)
-   - Match manifest artifacts exactly
-   - Only edit files listed in manifest
-4. **VALIDATE implementation**: `maid validate manifests/task-XXX.manifest.json --validation-mode implementation --use-manifest-chain`
-5. Run behavioral tests (from `validationCommand`)
-6. Iterate until all validations and tests pass
-
-**Error Recovery**: If validation fails, use `maid-fixer` agent to identify and fix issues one at a time.
-
-### Phase 3.5: Refactoring
-
-**Agent**: `maid-refactorer`
-
-1. After tests pass, use the `maid-refactorer` agent to:
-   - Improve code quality while tests pass
-   - Maintain public API and manifest compliance
-   - Apply clean code principles and patterns
-2. Validate tests still pass after each change
-3. Keep public API unchanged
-
-### Phase 4: Integration
-
-**VALIDATE EVERYTHING**:
-```bash
-maid validate        # Validate ALL manifests
-maid test            # Run ALL validation commands
-pytest tests/ -v     # Full test suite (Python)
-npm test             # Full test suite (TypeScript)
 ```
 
 ---
@@ -281,29 +283,36 @@ This progressive compliance system helps identify accountability gaps and suppor
 
 ---
 
-## Agent Usage Patterns
+## Subagent Invocation Patterns
 
-### Pattern 1: Complete MAID Workflow
+**⚠️ These patterns show the REQUIRED subagent invocations for common scenarios.**
+
+### Pattern 1: Complete MAID Workflow (Feature Request)
 
 ```
 User: "Add a user authentication module"
 
-1. Claude uses maid-manifest-architect agent:
-   → Creates manifests/task-XXX-user-auth.manifest.json
-   → Runs: maid validate manifests/task-XXX-user-auth.manifest.json --use-manifest-chain
+1. INVOKE maid-manifest-architect subagent via Task tool:
+   → subagent_type: "maid-manifest-architect"
+   → prompt: "Create manifest for user authentication module"
+   → Subagent creates manifests/task-XXX-user-auth.manifest.json
+   → Subagent runs: maid validate --use-manifest-chain
 
-2. Claude uses maid-test-designer agent:
-   → Reads unit-testing-rules.md for testing standards
-   → Creates tests/test_task_XXX_user_auth.py (behavioral tests)
-   → Runs: maid validate manifests/task-XXX-user-auth.manifest.json --validation-mode behavioral
+2. INVOKE maid-test-designer subagent via Task tool:
+   → subagent_type: "maid-test-designer"
+   → prompt: "Create behavioral tests for task-XXX"
+   → Subagent reads unit-testing-rules.md
+   → Subagent creates tests/test_task_XXX_user_auth.py
+   → Subagent runs: maid validate --validation-mode behavioral
 
-3. Claude uses maid-developer agent:
-   → Implements src/auth.py
-   → Runs: maid validate manifests/task-XXX-user-auth.manifest.json
-   → Runs: pytest tests/test_task_XXX_user_auth.py -v
+3. INVOKE maid-developer subagent via Task tool:
+   → subagent_type: "maid-developer"
+   → prompt: "Implement code to pass tests for task-XXX"
+   → Subagent implements src/auth.py
+   → Subagent runs: maid validate && pytest
 
 4. Final validation:
-   → Runs: maid validate && maid test
+   → maid validate && maid test
 ```
 
 ### Pattern 2: Fix Failing Validation
@@ -311,11 +320,13 @@ User: "Add a user authentication module"
 ```
 User: "The validation is failing, please fix it"
 
-Claude uses maid-fixer agent:
-→ Reads validation error output
-→ Identifies specific issue
-→ Fixes one issue at a time
-→ Re-runs: maid validate <path>
+INVOKE maid-fixer subagent via Task tool:
+→ subagent_type: "maid-fixer"
+→ prompt: "Fix validation errors for task-XXX"
+→ Subagent reads validation error output
+→ Subagent identifies specific issue
+→ Subagent fixes one issue at a time
+→ Subagent re-runs: maid validate <path>
 → Repeats until all issues resolved
 ```
 
@@ -324,11 +335,13 @@ Claude uses maid-fixer agent:
 ```
 User: "Refactor the implementation to improve code quality"
 
-Claude uses maid-refactorer agent:
-→ Reviews current implementation
-→ Applies clean code principles
-→ Runs tests after each change: pytest tests/test_task_XXX_*.py -v
-→ Ensures: maid validate passes
+INVOKE maid-refactorer subagent via Task tool:
+→ subagent_type: "maid-refactorer"
+→ prompt: "Improve code quality for [file/module]"
+→ Subagent reviews current implementation
+→ Subagent applies clean code principles
+→ Subagent runs tests after each change
+→ Subagent ensures: maid validate passes
 ```
 
 ### Pattern 4: Compliance Audit
@@ -336,12 +349,32 @@ Claude uses maid-refactorer agent:
 ```
 User: "Check if the code follows MAID methodology"
 
-Claude uses maid-auditor agent:
-→ Reviews all manifests
-→ Checks for immutability violations
-→ Verifies artifact declarations
-→ Runs: maid validate
-→ Reports compliance status
+INVOKE maid-auditor subagent via Task tool:
+→ subagent_type: "maid-auditor"
+→ prompt: "Audit MAID compliance for the codebase"
+→ Subagent reviews all manifests
+→ Subagent checks for immutability violations
+→ Subagent verifies artifact declarations
+→ Subagent runs: maid validate
+→ Subagent reports compliance status
+```
+
+### Pattern 5: Bug Fix
+
+```
+User: "Fix the login bug where users can't authenticate"
+
+1. INVOKE maid-manifest-architect subagent:
+   → Create manifest for the bug fix (bugs need manifests too!)
+
+2. INVOKE maid-test-designer subagent:
+   → Write test that reproduces the bug (should fail initially)
+
+3. INVOKE maid-developer subagent:
+   → Implement fix to pass the test
+
+4. Final validation:
+   → maid validate && maid test
 ```
 
 ---
@@ -620,22 +653,28 @@ maid --help
 
 ---
 
-## Getting Started with MAID Agents
+## Getting Started with MAID Subagents
+
+**⚠️ REMEMBER: Always INVOKE the appropriate subagent for each phase using the Task tool.**
 
 1. **Describe Your Goal**: Tell Claude what you want to build
-2. **Manifest Creation**: Claude uses `maid-manifest-architect` agent to create the manifest
-3. **Validation**: Claude runs `maid validate` to verify manifest structure
-4. **Test Design**: Claude uses `maid-test-designer` agent to create behavioral tests (following unit-testing-rules.md)
-5. **Implementation**: Claude uses `maid-developer` agent to implement code
-6. **Final Validation**: Claude runs `maid validate` and `maid test` to verify everything
+2. **Manifest Creation**: **INVOKE `maid-manifest-architect` subagent** via Task tool to create the manifest
+3. **Validation**: Subagent runs `maid validate` to verify manifest structure
+4. **Test Design**: **INVOKE `maid-test-designer` subagent** via Task tool to create behavioral tests (following unit-testing-rules.md)
+5. **Implementation**: **INVOKE `maid-developer` subagent** via Task tool to implement code
+6. **Final Validation**: Run `maid validate` and `maid test` to verify everything
 
-### Manual Getting Started
+### Manual Getting Started (Without Subagents)
+
+If for some reason subagents cannot be used, follow this manual process:
 
 1. Create your first manifest in `manifests/task-001-<description>.manifest.json`
 2. Write behavioral tests in `tests/test_task_001_*.py` or `tests/test_task_001_*.test.ts`
 3. Validate: `maid validate manifests/task-001-<description>.manifest.json --validation-mode behavioral`
 4. Implement the code
 5. Run tests to verify: `maid test`
+
+**Note**: Manual execution is less reliable than using subagents. Subagents have specialized instructions for each phase and ensure consistent application of MAID rules.
 
 ---
 
