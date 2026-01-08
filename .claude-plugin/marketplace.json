@@ -42,6 +42,23 @@
       "keywords": ["maid", "mcp", "model-context-protocol", "validation", "ai-agents"]
     },
     {
+      "name": "maid-lsp",
+      "source": {
+        "source": "github",
+        "repo": "mamertofabian/maid-lsp"
+      },
+      "description": "Language Server Protocol for MAID manifest validation - real-time diagnostics, code actions, and hover information",
+      "version": "0.1.0",
+      "author": {
+        "name": "Mamerto Fabian",
+        "email": "mamerto@codefrost.dev"
+      },
+      "repository": "https://github.com/mamertofabian/maid-lsp",
+      "license": "MIT",
+      "category": "ai-tools",
+      "keywords": ["lsp", "language-server", "maid", "validation", "diagnostics", "manifest"]
+    },
+    {
       "name": "everything-search",
       "source": {
         "source": "github",
