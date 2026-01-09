@@ -124,6 +124,31 @@ Generate natural-sounding voice audio directly from your AI workflows using Elev
 - **MAID Runner MCP**: Integrate validation into CI/CD pipelines
 - **Everything Search**: Automate file discovery tasks
 
+## 🛠️ Custom Commands
+
+This marketplace includes custom slash commands to help maintain the repository:
+
+### `/update-packages`
+
+Automatically check PyPI for updates to maid-runner and maid-lsp packages, update version numbers in marketplace.json, commit, and push changes.
+
+```bash
+# Check for updates and apply them
+/update-packages
+
+# Dry run to see what would be updated
+/update-packages --dry-run
+```
+
+**What it does:**
+1. Checks PyPI for latest versions of maid-runner and maid-lsp
+2. Compares with current versions in marketplace.json
+3. Updates marketplace.json and plugins/maid-runner/plugin.json if needed
+4. Commits changes with descriptive message
+5. Pushes to repository (skipped with --dry-run)
+
+**Requirements:** curl and jq must be installed
+
 ## 📚 Documentation
 
 - **YouTube Channel**: [AI-Driven Coder](https://www.youtube.com/@aidrivencoder) - Tutorials and demos
