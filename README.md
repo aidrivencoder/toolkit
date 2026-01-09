@@ -32,7 +32,7 @@ Professional AI development tools and MCP servers from [AI-Driven Coder](https:/
 
 ## 📦 Available Plugins
 
-### 🔍 MAID Runner (v0.7.0)
+### 🔍 MAID Runner (v0.9.0)
 
 **Tool-agnostic validation framework for Manifest-driven AI Development**
 

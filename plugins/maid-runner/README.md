@@ -175,7 +175,7 @@ After installing the plugin:
 
 ## Version
 
-Plugin version: **0.7.0** (matches maid-runner PyPI package version)
+Plugin version: **0.9.0** (matches maid-runner PyPI package version)
 
 ## Support
 
