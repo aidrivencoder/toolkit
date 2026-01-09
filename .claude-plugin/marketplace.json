@@ -14,7 +14,7 @@
       "name": "maid-runner",
       "source": "./plugins/maid-runner",
       "description": "Tool-agnostic validation framework for Manifest-driven AI Development (MAID) methodology",
-      "version": "0.9.1",
+      "version": "0.9.2",
       "author": {
         "name": "Mamerto Fabian",
         "email": "mamerto@codefrost.dev"
@@ -22,7 +22,14 @@
       "repository": "https://github.com/mamertofabian/maid-runner",
       "license": "MIT",
       "category": "productivity",
-      "keywords": ["maid", "validation", "ai-development", "manifest", "architecture", "testing"]
+      "keywords": [
+        "maid",
+        "validation",
+        "ai-development",
+        "manifest",
+        "architecture",
+        "testing"
+      ]
     },
     {
       "name": "maid-runner-mcp",
@@ -39,13 +46,19 @@
       "repository": "https://github.com/mamertofabian/maid-runner-mcp",
       "license": "MIT",
       "category": "ai-tools",
-      "keywords": ["maid", "mcp", "model-context-protocol", "validation", "ai-agents"]
+      "keywords": [
+        "maid",
+        "mcp",
+        "model-context-protocol",
+        "validation",
+        "ai-agents"
+      ]
     },
     {
       "name": "maid-lsp",
       "source": "./plugins/maid-lsp",
       "description": "Language Server Protocol for MAID manifest validation - real-time diagnostics, code actions, and hover information",
-      "version": "0.1.4",
+      "version": "0.1.5",
       "author": {
         "name": "Mamerto Fabian",
         "email": "mamerto@codefrost.dev"
@@ -53,7 +66,14 @@
       "repository": "https://github.com/mamertofabian/maid-lsp",
       "license": "MIT",
       "category": "ai-tools",
-      "keywords": ["lsp", "language-server", "maid", "validation", "diagnostics", "manifest"]
+      "keywords": [
+        "lsp",
+        "language-server",
+        "maid",
+        "validation",
+        "diagnostics",
+        "manifest"
+      ]
     },
     {
       "name": "everything-search",
@@ -70,7 +90,14 @@
       "repository": "https://github.com/mamertofabian/mcp-everything-search",
       "license": "MIT",
       "category": "productivity",
-      "keywords": ["search", "files", "mcp", "everything", "locate", "productivity"]
+      "keywords": [
+        "search",
+        "files",
+        "mcp",
+        "everything",
+        "locate",
+        "productivity"
+      ]
     },
     {
       "name": "elevenlabs",
@@ -87,7 +114,14 @@
       "repository": "https://github.com/mamertofabian/elevenlabs-mcp-server",
       "license": "MIT",
       "category": "ai-tools",
-      "keywords": ["elevenlabs", "tts", "text-to-speech", "mcp", "voice", "audio"]
+      "keywords": [
+        "elevenlabs",
+        "tts",
+        "text-to-speech",
+        "mcp",
+        "voice",
+        "audio"
+      ]
     }
   ]
 }
