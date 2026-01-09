@@ -1,0 +1,89 @@
+name: Update PyPI Packages
+
+on:
+  schedule:
+    # Runs daily at 9:00 AM UTC
+    - cron: '0 9 * * *'
+  workflow_dispatch: # Allow manual trigger
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  update-packages:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check PyPI for updates
+        id: check
+        run: |
+          # Fetch latest versions from PyPI
+          MAID_RUNNER_LATEST=$(curl -s https://pypi.org/pypi/maid-runner/json | jq -r '.info.version')
+          MAID_LSP_LATEST=$(curl -s https://pypi.org/pypi/maid-lsp/json | jq -r '.info.version')
+
+          # Get current versions from marketplace.json
+          MAID_RUNNER_CURRENT=$(jq -r '.plugins[] | select(.name == "maid-runner") | .version' .claude-plugin/marketplace.json)
+          MAID_LSP_CURRENT=$(jq -r '.plugins[] | select(.name == "maid-lsp") | .version' .claude-plugin/marketplace.json)
+
+          echo "maid_runner_latest=$MAID_RUNNER_LATEST" >> $GITHUB_OUTPUT
+          echo "maid_runner_current=$MAID_RUNNER_CURRENT" >> $GITHUB_OUTPUT
+          echo "maid_lsp_latest=$MAID_LSP_LATEST" >> $GITHUB_OUTPUT
+          echo "maid_lsp_current=$MAID_LSP_CURRENT" >> $GITHUB_OUTPUT
+
+          # Check if updates are needed
+          NEEDS_UPDATE="false"
+          if [ "$MAID_RUNNER_LATEST" != "$MAID_RUNNER_CURRENT" ] || [ "$MAID_LSP_LATEST" != "$MAID_LSP_CURRENT" ]; then
+            NEEDS_UPDATE="true"
+          fi
+          echo "needs_update=$NEEDS_UPDATE" >> $GITHUB_OUTPUT
+
+          echo "maid-runner: $MAID_RUNNER_CURRENT -> $MAID_RUNNER_LATEST"
+          echo "maid-lsp: $MAID_LSP_CURRENT -> $MAID_LSP_LATEST"
+          echo "Needs update: $NEEDS_UPDATE"
+
+      - name: Update version files
+        if: steps.check.outputs.needs_update == 'true'
+        run: |
+          MAID_RUNNER_LATEST="${{ steps.check.outputs.maid_runner_latest }}"
+          MAID_LSP_LATEST="${{ steps.check.outputs.maid_lsp_latest }}"
+
+          # Update marketplace.json
+          jq --arg mr "$MAID_RUNNER_LATEST" --arg ml "$MAID_LSP_LATEST" '
+            .plugins |= map(
+              if .name == "maid-runner" then .version = $mr
+              elif .name == "maid-lsp" then .version = $ml
+              else .
+              end
+            )
+          ' .claude-plugin/marketplace.json > tmp.json && mv tmp.json .claude-plugin/marketplace.json
+
+          # Update plugins/maid-runner/plugin.json
+          jq --arg v "$MAID_RUNNER_LATEST" '.version = $v' plugins/maid-runner/plugin.json > tmp.json && mv tmp.json plugins/maid-runner/plugin.json
+
+          # Update plugins/maid-lsp/plugin.json
+          jq --arg v "$MAID_LSP_LATEST" '.version = $v' plugins/maid-lsp/plugin.json > tmp.json && mv tmp.json plugins/maid-lsp/plugin.json
+
+      - name: Create Pull Request
+        if: steps.check.outputs.needs_update == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: "chore: update maid-runner to v${{ steps.check.outputs.maid_runner_latest }} and maid-lsp to v${{ steps.check.outputs.maid_lsp_latest }}"
+          title: "chore: update maid-runner to v${{ steps.check.outputs.maid_runner_latest }} and maid-lsp to v${{ steps.check.outputs.maid_lsp_latest }}"
+          body: |
+            Automated package update from PyPI.
+
+            ## Changes
+            - **maid-runner**: ${{ steps.check.outputs.maid_runner_current }} → ${{ steps.check.outputs.maid_runner_latest }}
+            - **maid-lsp**: ${{ steps.check.outputs.maid_lsp_current }} → ${{ steps.check.outputs.maid_lsp_latest }}
+
+            ---
+            *This PR was automatically created by the update-packages workflow.*
+          branch: chore/update-packages
+          delete-branch: true
+          labels: |
+            dependencies
+            automated
