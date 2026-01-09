@@ -1,7 +1,7 @@
 ---
-name: MAID Methodology
-description: This skill should be used when the user asks about "MAID methodology", "manifest-driven development", "create a manifest", "MAID workflow", "MAID rules", "validate manifest", "how to use MAID", "what is MAID", mentions "manifests/" directory, asks to "follow MAID", asks about "MAID agents", "maid-manifest-architect", "maid-developer", "maid-test-designer", "unit testing", "behavioral tests", or when working with MAID Runner commands. Provides comprehensive guidance on the Manifest-driven AI Development (MAID) v1.3 methodology including custom agents and CLI commands.
-version: 1.3.0
+name: maid-methodology
+description: Provides guidance on the MAID (Manifest-driven AI Development) methodology including creating manifests, writing behavioral tests, implementing code with TDD, validation, and using MAID subagents. Use when the user needs to follow manifest-driven development, create task manifests, write tests for manifests, or validate implementations.
+user-invocable: true
 ---
 
 # MAID Methodology
