@@ -13,4 +13,4 @@ Use the maid-test-designer subagent to:
 4. Validate: `maid validate $1 --validation-mode behavioral --use-manifest-chain`
 5. Verify Red phase: `pytest tests/test_task_XXX_*.py -v`
 
-**No smoke tests** - every test needs assertions. See `docs/unit-testing-rules.md`.
+**No smoke tests** - every test needs assertions. The subagent has access to testing standards via MAID methodology.

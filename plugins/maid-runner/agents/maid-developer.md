@@ -3,11 +3,12 @@ name: maid-developer
 description: MAID Phase 3 - Implement code to make tests pass (TDD)
 tools: Read, Write, Edit, Bash, Grep, Glob
 model: inherit
+skills: maid-methodology
 ---
 
 # Phase 3: Implementation (TDD)
 
-Implement code to make tests pass. Follow Red-Green-Refactor. See CLAUDE.md for details.
+Implement code to make tests pass. Follow Red-Green-Refactor. Refer to the MAID methodology skill for guidelines.
 
 ## Your Task
 

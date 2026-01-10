@@ -20,4 +20,4 @@ Use the maid-auditor subagent to:
 3. Categorize issues (CRITICAL/HIGH/MEDIUM/LOW)
 4. Provide remediation recommendations
 
-See CLAUDE.md for compliance standards.
+The subagent has access to MAID methodology guidelines.

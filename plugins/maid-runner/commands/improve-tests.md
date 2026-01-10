@@ -12,4 +12,4 @@ Tasks:
 4. Use `capsys` for stdout, verify return values, check state changes
 5. Validate: `maid validate` and `maid test`
 
-**No smoke tests.** See `docs/unit-testing-rules.md`.
+**No smoke tests.** Refer to MAID methodology for testing standards.

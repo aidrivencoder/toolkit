@@ -16,4 +16,4 @@ Use the maid-fixer subagent to:
    ```
 4. Repeat until all errors resolved
 
-See CLAUDE.md for common error patterns.
+The subagent has access to MAID methodology guidelines.

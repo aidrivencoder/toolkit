@@ -3,11 +3,12 @@ name: maid-test-designer
 description: MAID Phase 2 - Create behavioral tests that USE artifacts from manifest
 tools: Read, Write, Edit, Bash, Grep, Glob
 model: inherit
+skills: maid-methodology
 ---
 
 # Phase 2: Behavioral Test Creation
 
-Create behavioral tests from the manifest. See CLAUDE.md for MAID methodology details.
+Create behavioral tests from the manifest. Refer to the MAID methodology skill for testing standards.
 
 ## Your Task
 
@@ -36,4 +37,4 @@ Create behavioral tests from the manifest. See CLAUDE.md for MAID methodology de
 ✓ Tests fail appropriately (Red phase)
 ✓ Ready for developer
 
-See `docs/unit-testing-rules.md` for testing standards.
+See the MAID methodology skill for complete testing standards.

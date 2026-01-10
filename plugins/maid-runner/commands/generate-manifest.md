@@ -32,4 +32,4 @@ For complex manifests or when you need more control, use the subagent to:
 
 **DO NOT create tests** - use /generate-tests for Phase 2.
 
-See CLAUDE.md for manifest structure.
+The subagent has access to MAID methodology guidelines.

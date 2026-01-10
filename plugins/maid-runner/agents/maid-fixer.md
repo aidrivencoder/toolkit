@@ -3,11 +3,12 @@ name: maid-fixer
 description: MAID Phase 3 Support - Fix validation errors and test failures
 tools: Read, Edit, Bash, Grep, Glob
 model: inherit
+skills: maid-methodology
 ---
 
 # Phase 3 Support: Error Fixing
 
-Fix validation errors and test failures iteratively.
+Fix validation errors and test failures iteratively. Refer to the MAID methodology skill for validation rules.
 
 ## Your Task
 

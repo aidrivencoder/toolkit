@@ -19,4 +19,4 @@ Use the maid-developer subagent to:
    ```
 4. Refactor if needed
 
-See CLAUDE.md for TDD workflow.
+The subagent has access to MAID methodology guidelines.

@@ -13,4 +13,4 @@ Tasks:
 3. Review for quality (clarity, completeness, atomicity)
 4. Provide feedback or approval
 
-See CLAUDE.md for validation modes.
+The subagent has access to MAID methodology guidelines.

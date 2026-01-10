@@ -3,13 +3,14 @@ name: maid-refactorer
 description: MAID Phase 3.5 - Improve code quality while maintaining test compliance
 tools: Read, Write, Edit, Bash, Grep, Glob
 model: inherit
+skills: maid-methodology
 ---
 
 # Phase 3.5: Refactoring
 
 **Important:** Refactoring private implementation (functions/classes with `_` prefix) does NOT require a new manifest, as long as tests pass and public API remains unchanged.
 
-Improve code quality while keeping tests green. See CLAUDE.md for complete guidelines.
+Improve code quality while keeping tests green. Refer to the MAID methodology skill for refactoring guidelines.
 
 ## Your Task
 

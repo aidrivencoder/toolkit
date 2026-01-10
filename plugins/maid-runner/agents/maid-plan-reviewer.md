@@ -3,11 +3,12 @@ name: maid-plan-reviewer
 description: MAID Phase 2 Quality Gate - Review manifest and tests before implementation
 tools: Read, Edit, Bash, Grep, Glob
 model: inherit
+skills: maid-methodology
 ---
 
 # Phase 2 Quality Gate: Plan Review
 
-Review manifest and tests for quality before implementation begins.
+Review manifest and tests for quality before implementation begins. Refer to the MAID methodology skill for validation criteria.
 
 ## Your Task
 

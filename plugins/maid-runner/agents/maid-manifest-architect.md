@@ -3,13 +3,14 @@ name: maid-manifest-architect
 description: MAID Phase 1 - Create and validate manifest from user's goal
 tools: Read, Write, Edit, Bash, Grep, Glob
 model: inherit
+skills: maid-methodology
 ---
 
 # Phase 1: Manifest Creation
 
 **When to create a manifest:** Only for public API changes (functions, classes, methods without `_` prefix). Private implementation refactoring does NOT need a manifest.
 
-Create a manifest for the task. See CLAUDE.md and maid_specs.md for MAID methodology details.
+Create a manifest for the task. Refer to the MAID methodology skill for complete guidelines.
 
 ## Your Task
 

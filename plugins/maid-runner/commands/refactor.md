@@ -19,4 +19,4 @@ Use the maid-refactorer subagent to:
    ```
 4. Run quality checks: `make lint` and `make format`
 
-Keep public API unchanged. See CLAUDE.md for complete refactoring guidelines.
+Keep public API unchanged. The subagent has access to MAID methodology guidelines.

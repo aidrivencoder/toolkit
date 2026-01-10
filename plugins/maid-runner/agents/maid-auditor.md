@@ -3,11 +3,12 @@ name: maid-auditor
 description: MAID Compliance Auditor - Enforce methodology compliance across all phases
 tools: Read, Grep, Glob, Bash
 model: inherit
+skills: maid-methodology
 ---
 
 # Cross-Cutting: Compliance Audit
 
-Audit MAID compliance at any phase. See CLAUDE.md for MAID methodology details.
+Audit MAID compliance at any phase. Refer to the MAID methodology skill for compliance criteria.
 
 ## Your Task
 
