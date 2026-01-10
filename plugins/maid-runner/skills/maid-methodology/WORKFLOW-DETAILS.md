@@ -19,12 +19,12 @@ Detailed guidance for each phase of the MAID workflow.
 
 ## Phase 1: Goal Definition & Manifest Creation
 
-**Subagent: `maid-manifest-architect`**
+**Subagent: `maid-runner:maid-manifest-architect`**
 
 ### Steps
 
 1. Confirm the high-level goal with user before proceeding
-2. **INVOKE the `maid-manifest-architect` subagent** using the Task tool to:
+2. **INVOKE the `maid-runner:maid-manifest-architect` subagent** using the Task tool to:
    - Analyze the goal and identify affected files
    - Find next task number: `ls manifests/task-*.manifest.json | tail -1`
    - Draft manifest (`manifests/task-XXX.manifest.json`) - **PRIMARY CONTRACT**
@@ -46,11 +46,11 @@ Detailed guidance for each phase of the MAID workflow.
 
 ## Phase 2: Planning Loop (Test Design)
 
-**Subagent: `maid-test-designer`**
+**Subagent: `maid-runner:maid-test-designer`**
 
 ### Steps
 
-1. **INVOKE the `maid-test-designer` subagent** using the Task tool to:
+1. **INVOKE the `maid-runner:maid-test-designer` subagent** using the Task tool to:
    - Read manifest `expectedArtifacts`
    - Create behavioral tests (`tests/test_task_XXX_*.py` or `tests/test_task_XXX_*.test.ts`)
    - **Follow unit-testing-rules.md** for testing standards
@@ -61,7 +61,7 @@ Detailed guidance for each phase of the MAID workflow.
 
 ### Quality Gate
 
-**INVOKE `maid-plan-reviewer` subagent** to review manifest and tests before proceeding to implementation.
+**INVOKE `maid-runner:maid-plan-reviewer` subagent** to review manifest and tests before proceeding to implementation.
 
 The plan reviewer verifies:
 - Manifest completeness
@@ -72,13 +72,13 @@ The plan reviewer verifies:
 
 ## Phase 3: Implementation (TDD)
 
-**Subagent: `maid-developer`**
+**Subagent: `maid-runner:maid-developer`**
 
 ### Steps
 
 1. Confirm Red phase (tests fail)
 2. Load ONLY files from manifest (`editableFiles` + `readonlyFiles`)
-3. **INVOKE the `maid-developer` subagent** using the Task tool to:
+3. **INVOKE the `maid-runner:maid-developer` subagent** using the Task tool to:
    - Implement code to pass tests (Green phase)
    - Match manifest artifacts exactly
    - Only edit files listed in manifest
@@ -88,17 +88,17 @@ The plan reviewer verifies:
 
 ### Error Recovery
 
-If validation fails, **INVOKE `maid-fixer` subagent** to identify and fix issues one at a time.
+If validation fails, **INVOKE `maid-runner:maid-fixer` subagent** to identify and fix issues one at a time.
 
 ---
 
 ## Phase 3.5: Refactoring
 
-**Subagent: `maid-refactorer`**
+**Subagent: `maid-runner:maid-refactorer`**
 
 ### Steps
 
-1. After tests pass, **INVOKE the `maid-refactorer` subagent** to:
+1. After tests pass, **INVOKE the `maid-runner:maid-refactorer` subagent** to:
    - Improve code quality while tests pass
    - Maintain public API and manifest compliance
    - Apply clean code principles and patterns

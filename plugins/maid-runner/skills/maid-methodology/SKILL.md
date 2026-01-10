@@ -33,13 +33,13 @@ A methodology for developing software with AI assistance by explicitly declaring
 
 | Phase | Subagent | Purpose |
 |-------|----------|---------|
-| **Phase 1** | `maid-manifest-architect` | Create/modify manifests |
-| **Phase 1-2 Gate** | `maid-plan-reviewer` | Review before implementation |
-| **Phase 2** | `maid-test-designer` | Create behavioral tests |
-| **Phase 3** | `maid-developer` | Implement code (TDD) |
-| **Phase 3 Support** | `maid-fixer` | Fix validation/test failures |
-| **Phase 3.5** | `maid-refactorer` | Improve code quality |
-| **Audit** | `maid-auditor` | Check MAID compliance |
+| **Phase 1** | `maid-runner:maid-manifest-architect` | Create/modify manifests |
+| **Phase 1-2 Gate** | `maid-runner:maid-plan-reviewer` | Review before implementation |
+| **Phase 2** | `maid-runner:maid-test-designer` | Create behavioral tests |
+| **Phase 3** | `maid-runner:maid-developer` | Implement code (TDD) |
+| **Phase 3 Support** | `maid-runner:maid-fixer` | Fix validation/test failures |
+| **Phase 3.5** | `maid-runner:maid-refactorer` | Improve code quality |
+| **Audit** | `maid-runner:maid-auditor` | Check MAID compliance |
 
 ### Invoking Subagents
 
@@ -47,7 +47,7 @@ Use the **Task tool** to delegate:
 
 ```
 Task tool parameters:
-- subagent_type: "maid-manifest-architect" (or other agent name)
+- subagent_type: "maid-runner:maid-manifest-architect" (or other maid-runner agent)
 - prompt: "Create a manifest for [goal]"
 - description: "Phase 1: Create manifest"
 ```
@@ -59,32 +59,32 @@ For detailed invocation patterns, see [SUBAGENT-PATTERNS.md](SUBAGENT-PATTERNS.m
 ## MAID Workflow Overview
 
 ### Phase 1: Manifest Creation
-**Subagent: `maid-manifest-architect`**
+**Subagent: `maid-runner:maid-manifest-architect`**
 
 1. Confirm goal with user
 2. Invoke subagent to create `manifests/task-XXX-description.manifest.json`
 3. Validate: `maid validate <path> --use-manifest-chain`
 
 ### Phase 2: Test Design
-**Subagent: `maid-test-designer`**
+**Subagent: `maid-runner:maid-test-designer`**
 
 1. Invoke subagent to create behavioral tests
 2. Tests must USE artifacts and ASSERT on behavior
 3. Validate: `maid validate <path> --validation-mode behavioral`
-4. **Quality Gate**: Invoke `maid-plan-reviewer` before implementation
+4. **Quality Gate**: Invoke `maid-runner:maid-plan-reviewer` before implementation
 
 ### Phase 3: Implementation
-**Subagent: `maid-developer`**
+**Subagent: `maid-runner:maid-developer`**
 
 1. Confirm Red phase (tests fail)
 2. Invoke subagent to implement code
 3. Validate: `maid validate <path> --validation-mode implementation`
 4. Run tests until all pass
 
-**Error Recovery**: Invoke `maid-fixer` if validation fails.
+**Error Recovery**: Invoke `maid-runner:maid-fixer` if validation fails.
 
 ### Phase 3.5: Refactoring
-**Subagent: `maid-refactorer`**
+**Subagent: `maid-runner:maid-refactorer`**
 
 1. Invoke subagent to improve code quality
 2. Maintain passing tests
