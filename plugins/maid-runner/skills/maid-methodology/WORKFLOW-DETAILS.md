@@ -2,6 +2,19 @@
 
 Detailed guidance for each phase of the MAID workflow.
 
+## Contents
+
+- Phase 1: Goal Definition & Manifest Creation
+- Phase 2: Planning Loop (Test Design)
+- Phase 3: Implementation (TDD)
+- Phase 3.5: Refactoring
+- Phase 4: Integration
+- Handling Prerequisite Discovery
+- Definition of Done
+- Key Principle: No Partial Solutions
+- TDD Workflow Summary
+- Manual Workflow (Without Subagents)
+
 ---
 
 ## Phase 1: Goal Definition & Manifest Creation

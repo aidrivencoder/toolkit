@@ -2,6 +2,20 @@
 
 Templates and examples for creating MAID manifests.
 
+## Contents
+
+- Critical Rules (expectedArtifacts, Immutability, One File Per Manifest)
+- Python Template
+- TypeScript Template
+- Artifact Types (Python, TypeScript)
+- Validation Modes (Strict, Permissive)
+- Artifact Rules
+- Superseded Manifests
+- File Deletion Pattern
+- File Rename Pattern
+- Snapshot to Evolution Transition
+- Naming Convention
+
 ---
 
 ## Critical Rules

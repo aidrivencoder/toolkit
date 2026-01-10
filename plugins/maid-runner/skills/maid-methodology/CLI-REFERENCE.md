@@ -2,6 +2,18 @@
 
 Complete command reference for MAID Runner CLI.
 
+## Contents
+
+- Whole-Codebase Validation
+- Single Manifest Validation
+- Manifest Creation
+- Snapshot Commands
+- Finding Manifests
+- Test Execution
+- Help Commands
+- File Tracking Analysis
+- Installation
+
 ---
 
 ## Whole-Codebase Validation

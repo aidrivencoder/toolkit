@@ -2,6 +2,18 @@
 
 Detailed patterns for invoking MAID subagents using the Task tool.
 
+## Contents
+
+- Why Subagents Are Required
+- Subagent Reference (table of all 7 subagents)
+- Pattern 1: Complete MAID Workflow (Feature Request)
+- Pattern 2: Fix Failing Validation
+- Pattern 3: Improve Code Quality
+- Pattern 4: Compliance Audit
+- Pattern 5: Bug Fix
+- Common Delegation Examples
+- Task Tool Invocation Format
+
 ---
 
 ## Why Subagents Are Required
