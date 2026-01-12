@@ -11,7 +11,7 @@ Professional AI development tools and MCP servers from [AI-Driven Coder](https:/
 ### Install the Marketplace
 
 ```bash
-/plugin marketplace add aidrivencoder/toolkit
+/plugin marketplace add aidrivencoder/claude-plugins
 ```
 
 ### Install Individual Plugins
