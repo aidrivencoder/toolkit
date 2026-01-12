@@ -140,7 +140,7 @@ The marketplace registry defines 4 plugins:
 Users install via:
 ```bash
 # Add marketplace
-/plugin marketplace add aidrivencoder/claude-plugins
+/plugin marketplace add aidrivencoder/toolkit
 
 # Install individual plugins
 /plugin install maid-runner@aidrivencoder
