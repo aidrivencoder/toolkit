@@ -1,6 +1,6 @@
 {
   "name": "maid-runner",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Tool-agnostic validation framework for Manifest-driven AI Development (MAID) methodology",
   "author": {
     "name": "Mamerto Fabian",
